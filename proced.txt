@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>warzywniak</title>
+</head>
+<body>
+    <?php
+        $server="localhost";
+        $user="root";
+        $pass="";
+        $dbname="dane";
+
+        $conn = mysqli_connect($server, $user, $pass, $dbname);
+
+        if(mysqli_connect_error()){
+            die("Blad". mysqli_connect_error());
+        }
+
+        $sql = "SELECT id, nazwa, ilosc, cena FROM produkty";
+
+        $result=mysqli_query($conn, $sql);
+
+        if(mysqli_num_rows($result)>0){
+            echo"<table>";
+            echo"<tr><th>ID</th><th>nazwa</th><th>ilosc</th><th>cena</th></tr>";
+            while($row=mysqli_fetch_array($result)){
+                echo"<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>". $row["ilosc"] . "</td><td>" . $row[3] . "</td></tr>";
+            }
+            echo"<table>";
+        }
+        else{
+            echo"bład";
+        }
+
+        mysqli_close($conn);
+    ?>
+</body>
+</html>
